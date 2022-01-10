@@ -2,9 +2,9 @@
   // Basic Config
   let compendiumTypes = [
     "Actor",
-    "Card",
+    "Cards",
     "Item",
-    "JournelEntry",
+    "JournalEntry",
     "Macro",
     "Playlist",
     "RollTable",
@@ -94,13 +94,22 @@
         <label for="title">Module Name</label>
         <input type="text" id="title" name="title" value="" />
       </div>
+      <div class="flex">
+        <label for="author" class="center">Author</label>
+        <input type="text" id="author" name="author" value="" />
+      </div>
+      <div class="flex">
+        <label for="description" class="center">Description</label>
+        <input type="text" id="description" name="description" value="" />
+      </div>
     </fieldset>
     <fieldset>
       <legend>Packs</legend>
       <div class="row">
         {#each packs as pack}
-          <div class="col col-1-2">
+          <div>
             <fieldset>
+            <div class="flex center">
               <div class="flex">
                 <label for="label" class="center">Name</label>
                 <input type="text" bind:value={pack.label} />
@@ -114,6 +123,7 @@
                   {/each}
                 </select>
               </div>
+            </div>
             </fieldset>
           </div>
         {/each}
@@ -158,12 +168,14 @@
 
   .flex label {
       width: 100px;
+      margin-right: 5px;
+
+      text-align: right;
+
   }
 
   .center { 
       margin-top: 12px;
-      margin-right: 5px;
-      text-align: right;
     
   }
 </style>
