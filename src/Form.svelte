@@ -86,8 +86,10 @@
   // {'name': "test_module", 'title': 'Test Module'
 </script>
 
+
 <main>
-  <form on:submit|preventDefault={onSubmit}>
+    <h1>Shared Compendium Creator</h1>
+    <form on:submit|preventDefault={onSubmit}>
     <fieldset>
       <legend>Module Properties</legend>
       <div class="flex">

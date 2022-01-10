@@ -13,7 +13,10 @@ body {
 	margin: 0;
   }
   
-
+h1 { 
+	color: #fff;
+	text-align: center;
+}
 a {
 	font-size: 14px;
 	font-weight: 400;
