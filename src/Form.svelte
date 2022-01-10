@@ -109,21 +109,21 @@
         {#each packs as pack}
           <div>
             <fieldset>
-            <div class="flex center">
-              <div class="flex">
-                <label for="label" class="center">Name</label>
-                <input type="text" bind:value={pack.label} />
-              </div>
-              <div  class="flex">
-                <label for="Type" class="center">Type</label>
+              <div class="flex center">
+                <div class="flex">
+                  <label for="label" class="center">Name</label>
+                  <input type="text" bind:value={pack.label} />
+                </div>
+                <div class="flex">
+                  <label for="Type" class="center">Type</label>
 
-                <select bind:value={pack.type}>
-                  {#each compendiumTypes as compendium}
-                    <option value={compendium}>{compendium}</option>
-                  {/each}
-                </select>
+                  <select bind:value={pack.type}>
+                    {#each compendiumTypes as compendium}
+                      <option value={compendium}>{compendium}</option>
+                    {/each}
+                  </select>
+                </div>
               </div>
-            </div>
             </fieldset>
           </div>
         {/each}
@@ -162,20 +162,18 @@
     text-align: center;
   }
 
-  .flex { 
-      display: flex;
+  .flex {
+    display: flex;
   }
 
   .flex label {
-      width: 100px;
-      margin-right: 5px;
+    width: 100px;
+    margin-right: 5px;
 
-      text-align: right;
-
+    text-align: right;
   }
 
-  .center { 
-      margin-top: 12px;
-    
+  .center {
+    margin-top: 12px;
   }
 </style>
