@@ -90,7 +90,7 @@
   <form on:submit|preventDefault={onSubmit}>
     <fieldset>
       <legend>Module Properties</legend>
-      <div>
+      <div class="flex">
         <label for="title">Module Name</label>
         <input type="text" id="title" name="title" value="" />
       </div>
@@ -101,12 +101,12 @@
         {#each packs as pack}
           <div class="col col-1-2">
             <fieldset>
-              <div>
-                <label for="label">Name</label>
+              <div class="flex">
+                <label for="label" class="center">Name</label>
                 <input type="text" bind:value={pack.label} />
               </div>
-              <div>
-                <label for="Type">Type</label>
+              <div  class="flex">
+                <label for="Type" class="center">Type</label>
 
                 <select bind:value={pack.type}>
                   {#each compendiumTypes as compendium}
@@ -150,5 +150,20 @@
   .green {
     color: green;
     text-align: center;
+  }
+
+  .flex { 
+      display: flex;
+  }
+
+  .flex label {
+      width: 100px;
+  }
+
+  .center { 
+      margin-top: 12px;
+      margin-right: 5px;
+      text-align: right;
+    
   }
 </style>
