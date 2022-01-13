@@ -11,7 +11,7 @@
     "Scene",
   ];
   let selected = "Actor";
-  let siteAddr = "https://"+ window.location.host + "/module/manifest/";
+  let siteAddr =  location.protocol.concat("//").concat(window.location.host) + "/module/manifest/";
   
 
   let packs = [{ name: "", label: "", type: "Actor" }];
