@@ -11,7 +11,8 @@
     "Scene",
   ];
   let selected = "Actor";
-  let siteAddr = "https://fgen.mxzf.info/module/manifest/";
+  let siteAddr = "https://"+ window.location.host + "/module/manifest/";
+  
 
   let packs = [{ name: "", label: "", type: "Actor" }];
 
