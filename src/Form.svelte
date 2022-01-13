@@ -86,10 +86,9 @@
   // {'name': "test_module", 'title': 'Test Module'
 </script>
 
-
 <main>
-    <h1>Shared Compendium Creator</h1>
-    <form on:submit|preventDefault={onSubmit}>
+  <h1>Shared Compendium Creator</h1>
+  <form on:submit|preventDefault={onSubmit}>
     <fieldset>
       <legend>Module Properties</legend>
       <div class="flex">
@@ -140,9 +139,22 @@
 
   <div>
     <label for="name">URL:</label>
-    <input type="text" bind:value={URL} />
+    <input type="text" bind:value={URL} readonly />
   </div>
   <div class="green">{copy}</div>
+  <div>
+    <h2>To Install:</h2>
+  </div>
+  <ul>
+    <li>Open the Foundry setup page in a web browser</li>
+    <li>Click on the Add-on Modules tab</li>
+    <li>Click the Install Module button</li>
+    <li>
+      Paste the manifest URL to the module being installed in the field at the
+      bottom of the dialog
+    </li>
+    <li>Click Install</li>
+  </ul>
 </main>
 
 <style>
@@ -177,5 +189,9 @@
 
   .center {
     margin-top: 12px;
+  }
+
+  li {
+    line-height: 1.5;
   }
 </style>
