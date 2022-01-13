@@ -147,12 +147,11 @@
     <h2>To Install:</h2>
   </div>
   <ul>
-    <li>Open the Foundry setup page in a web browser</li>
+    <li>Open the Foundry Setup page</li>
     <li>Click on the Add-on Modules tab</li>
-    <li>Click the Install Module button</li>
+    <li>Click the Install Module button near the bottom</li>
     <li>
-      Paste the manifest URL to the module being installed in the field at the
-      bottom of the dialog
+      Paste the manifest URL generated above into the field at the bottom of the dialog
     </li>
     <li>Click Install</li>
   </ul>
