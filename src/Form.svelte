@@ -276,6 +276,7 @@
     --sv-item-active-bg: rgba(255, 255, 255, 0.4) !important;
     --sv-highlight-bg: rgb(43, 43, 43) !important;
     font-size: 18px;
+    width:100% !important;
   }
 
   :global(.sv-dropdown) {
