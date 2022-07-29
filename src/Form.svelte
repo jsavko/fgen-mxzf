@@ -2,6 +2,7 @@
   // Basic Config
   let compendiumTypes = [
     "Actor",
+    "Adventure",
     "Cards",
     "Item",
     "JournalEntry",
@@ -10,10 +11,11 @@
     "RollTable",
     "Scene",
   ];
+
   let selected = "Actor";
   let siteAddr =  location.protocol.concat("//").concat(window.location.host) + "/module/manifest/";
   
-
+  
   let packs = [{ name: "", label: "", type: "Actor" }];
 
   let URL = "";
@@ -23,6 +25,9 @@
     copy = "";
     const formData = new FormData(e.target);
 
+
+    //Create json data from form field
+    // {title:String, author:String, description:String}
     const data = {};
     for (let field of formData) {
       const [key, value] = field;
@@ -32,6 +37,7 @@
       data[key] = value;
     }
 
+    //Create array from Packs object
     data.packs = [];
     for (let pair of packs) {
       let pack_data = {};
@@ -84,10 +90,19 @@
     copy = "";
   }
 
+  function delete_pack(e) { 
+    e.preventDefault();
+    packs  = packs.filter(m => m != packs[e.target.id]);
+    if (packs == "") { 
+      clear(e);
+    }
+  }
+
   // {'name': "test_module", 'title': 'Test Module'
 </script>
 
 <main>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <h1>Shared Compendium Creator</h1>
   <form on:submit|preventDefault={onSubmit}>
     <fieldset>
@@ -104,11 +119,15 @@
         <label for="description" class="center">Description</label>
         <input type="text" id="description" name="description" value="" />
       </div>
+      <div class="flex">
+        <label for="system" class="center">System</label>
+        <input type="text" id="system" name="system" value="" />
+      </div>
     </fieldset>
     <fieldset>
       <legend>Packs</legend>
       <div class="row">
-        {#each packs as pack}
+        {#each packs as pack, _id}
           <div>
             <fieldset>
               <div class="flex center">
@@ -124,6 +143,9 @@
                       <option value={compendium}>{compendium}</option>
                     {/each}
                   </select>
+                </div>
+                <div class="flex">
+                  <i on:click={delete_pack} id="{_id}" class="fa fa-trash-o">&nbsp;</i>
                 </div>
               </div>
             </fieldset>
@@ -183,8 +205,21 @@
   .flex label {
     width: 100px;
     margin-right: 5px;
-
     text-align: right;
+  }
+  
+  .flex i { 
+    font-size:24px;
+    width: 24px;
+    margin-left:50px;
+    margin-right: 5px;
+    text-align: right;
+    margin-top: 7px;
+    color: #4d6deb;
+  }
+
+  .flex i:hover { 
+    color:red;
   }
 
   .center {
