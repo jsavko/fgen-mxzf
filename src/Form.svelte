@@ -21,9 +21,7 @@
     "/module/manifest/";
 
   //remote source for search data
-  const dataURL =
-    location.protocol.concat("//").concat(window.location.host) +
-    "/systems.json";
+  const dataURL = "/systems.json";
   let searchData = [];
   let options = {};
   let myValue = "";
