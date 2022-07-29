@@ -1,0 +1,16 @@
+  {
+    "systems": [
+        {
+            "id": "dnd5e",
+            "name": "Dungeons and Dragons 5th Edition"
+        },
+        {
+            "id": "pf2e",
+            "name": "Pathfinder 2nd Edition"
+        },
+        {
+          "id": "pf1e",
+          "name": "Pathfinder 1st Edition"
+      }
+    ]
+}

@@ -1,4 +1,7 @@
 <script>
+  import { onMount } from "svelte";
+  import Svelecte from "svelecte";
+
   // Basic Config
   let compendiumTypes = [
     "Actor",
@@ -13,9 +16,18 @@
   ];
 
   let selected = "Actor";
-  let siteAddr =  location.protocol.concat("//").concat(window.location.host) + "/module/manifest/";
-  
-  
+  let siteAddr =
+    location.protocol.concat("//").concat(window.location.host) +
+    "/module/manifest/";
+
+  //remote source for search data
+  const dataURL =
+    location.protocol.concat("//").concat(window.location.host) +
+    "/systems.json";
+  let searchData = [];
+  let options = {};
+  let myValue = "";
+
   let packs = [{ name: "", label: "", type: "Actor" }];
 
   let URL = "";
@@ -24,7 +36,6 @@
   function onSubmit(e) {
     copy = "";
     const formData = new FormData(e.target);
-
 
     //Create json data from form field
     // {title:String, author:String, description:String}
@@ -51,6 +62,8 @@
     }
     //data.packs = packs;
     console.log(data);
+
+    //Base64 the object to make the manifest URL
     URL = siteAddr + btoa(JSON.stringify(data)) + "/manifest.json";
     navigator.clipboard.writeText(URL);
     copy = "Copied to clipboard";
@@ -76,6 +89,9 @@
     return str;
   }
 
+  // Pack Management GUI funnctions
+  // e = click Event
+
   function add(e) {
     e.preventDefault();
     packs = packs.concat({ name: "", label: "", type: "Actor" });
@@ -90,19 +106,28 @@
     copy = "";
   }
 
-  function delete_pack(e) { 
+  function delete_pack(e) {
     e.preventDefault();
-    packs  = packs.filter(m => m != packs[e.target.id]);
-    if (packs == "") { 
+    packs = packs.filter((m) => m != packs[e.target.id]);
+    if (packs == "") {
       clear(e);
     }
   }
 
-  // {'name': "test_module", 'title': 'Test Module'
+  //Override onMount to make it async. Use for remote data source for searching
+
+  onMount(async function () {
+    const response = await fetch(dataURL, options);
+    searchData = await response.json();
+    console.log(searchData);
+  });
 </script>
 
 <main>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
   <h1>Shared Compendium Creator</h1>
   <form on:submit|preventDefault={onSubmit}>
     <fieldset>
@@ -121,7 +146,13 @@
       </div>
       <div class="flex">
         <label for="system" class="center">System</label>
-        <input type="text" id="system" name="system" value="" />
+        <Svelecte
+          options={searchData.systems}
+          bind:value={myValue}
+          name="system"
+          inputId="system"
+          creatable=true
+        />
       </div>
     </fieldset>
     <fieldset>
@@ -145,7 +176,11 @@
                   </select>
                 </div>
                 <div class="flex">
-                  <i on:click={delete_pack} id="{_id}" class="fa fa-trash-o">&nbsp;</i>
+                  {#if packs.length > 1}<i
+                      on:click={delete_pack}
+                      id={_id}
+                      class="fa fa-trash-o">&nbsp;</i
+                    >{/if}
                 </div>
               </div>
             </fieldset>
@@ -173,7 +208,8 @@
     <li>Click on the Add-on Modules tab</li>
     <li>Click the Install Module button near the bottom</li>
     <li>
-      Paste the manifest URL generated above into the field at the bottom of the dialog
+      Paste the manifest URL generated above into the field at the bottom of the
+      dialog
     </li>
     <li>Click Install</li>
   </ul>
@@ -207,19 +243,19 @@
     margin-right: 5px;
     text-align: right;
   }
-  
-  .flex i { 
-    font-size:24px;
+
+  .flex i {
+    font-size: 24px;
     width: 24px;
-    margin-left:50px;
+    margin-left: 50px;
     margin-right: 5px;
     text-align: right;
     margin-top: 7px;
     color: #4d6deb;
   }
 
-  .flex i:hover { 
-    color:red;
+  .flex i:hover {
+    color: red;
   }
 
   .center {
@@ -228,5 +264,30 @@
 
   li {
     line-height: 1.5;
+  }
+
+  :global(.svelecte-control) {
+    --sv-bg: #37425f !important;
+    --sv-active-border: 2px solid #4d6deb !important;
+    --sv-border-color: #4d6deb !important;
+    --sv-color: #fff !important;
+    --sv-item-color: #fff !important;
+    --sv-item-selected-bg: rgba(255, 255, 255, 0.4) !important;
+    --sv-item-active-bg: rgba(255, 255, 255, 0.4) !important;
+    --sv-highlight-bg: rgb(43, 43, 43) !important;
+    font-size: 18px;
+  }
+
+  :global(.sv-dropdown) {
+    font-size: 18px;
+    background: #37425f;
+    color: #fff;
+    width: 100%;
+    border-radius: 6px;
+    border: 2px solid #4d6deb;
+    padding: 0 6px;
+    margin: 0 0 16px;
+    outline: none;
+    box-sizing: border-box;
   }
 </style>
