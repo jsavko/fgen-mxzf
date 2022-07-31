@@ -21,7 +21,7 @@
     "/module/manifest/";
 
   //remote source for search data
-  const dataURL = "/systems.json";
+  const dataURL = "/systems";
   let searchData = [];
   let options = {};
   let myValue = "";
@@ -250,10 +250,12 @@
     text-align: right;
     margin-top: 7px;
     color: #4d6deb;
+    cursor: pointer;
   }
 
   .flex i:hover {
     color: red;
+    
   }
 
   .center {

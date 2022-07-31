@@ -1,7 +1,8 @@
 import App from './App.svelte';
 
+var tar = document.getElementById('form');
 var app = new App({
-	target: document.body
+	target: tar
 });
 
 export default app;
