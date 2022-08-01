@@ -143,13 +143,18 @@
         <input type="text" id="description" name="description" value="" />
       </div>
       <div class="flex">
-        <label for="system" class="center">System</label>
+        <div class="tooltip">
+          <label for="system" class="center tooltip">🛈 System</label>
+          <span class="tooltiptext"
+            >Only used for Actor, Adventure, and Item packs</span
+          >
+        </div>
         <Svelecte
           options={searchData.systems}
           bind:value={myValue}
           name="system"
           inputId="system"
-          creatable=true
+          creatable="true"
         />
       </div>
     </fieldset>
@@ -255,7 +260,6 @@
 
   .flex i:hover {
     color: red;
-    
   }
 
   .center {
@@ -269,14 +273,14 @@
   :global(.svelecte-control) {
     --sv-bg: #37425f !important;
     --sv-active-border: 2px solid #4d6deb !important;
-    --sv-border-color: #4d6deb !important;
+    --sv-border: 2px solid #4d6deb !important;
     --sv-color: #fff !important;
     --sv-item-color: #fff !important;
     --sv-item-selected-bg: rgba(255, 255, 255, 0.4) !important;
     --sv-item-active-bg: rgba(255, 255, 255, 0.4) !important;
     --sv-highlight-bg: rgb(43, 43, 43) !important;
     font-size: 18px;
-    width:100% !important;
+    width: 100% !important;
   }
 
   :global(.sv-dropdown) {
@@ -290,5 +294,42 @@
     margin: 0 0 16px;
     outline: none;
     box-sizing: border-box;
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    left: -10px;
+    width: 92px;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 650px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -40px;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
   }
 </style>
