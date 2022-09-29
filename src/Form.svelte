@@ -3,6 +3,8 @@
   import Svelecte from "svelecte";
 
   // Basic Config
+  let debug = false;
+
   let compendiumTypes = [
     "Actor",
     "Adventure",
@@ -16,9 +18,15 @@
   ];
 
   let selected = "Actor";
-  let siteAddr =
-    location.protocol.concat("//").concat(window.location.host) +
-    "/module/manifest/";
+  let siteAddr
+  
+  if (debug) { 
+    siteAddr = 'https://fgen-mxzf-prod.herokuapp.com/module/manifest/'
+  } else { 
+    siteAddr =
+      location.protocol.concat("//").concat(window.location.host) + "/module/manifest/";
+  }
+
 
   //remote source for search data
   const dataURL = "/systems";
@@ -37,7 +45,7 @@
 
     //Create json data from form field
     // {title:String, author:String, description:String}
-    const data = {};
+    let data = {};
     for (let field of formData) {
       const [key, value] = field;
       if (key == "title") {
@@ -61,8 +69,17 @@
     //data.packs = packs;
     console.log(data);
 
+    function Base64EncodeUrl(str){
+      return str.replace(/\+/g, '-').replace(/\//g, '_');
+    }
+
+    let encodedData =  btoa(JSON.stringify(data));
+    if (encodedData.search('/') != -1) {
+      encodedData = Base64EncodeUrl(encodedData);
+    }
+
     //Base64 the object to make the manifest URL
-    URL = siteAddr + btoa(JSON.stringify(data)) + "/manifest.json";
+    URL = siteAddr + encodedData + "/manifest.json";
     navigator.clipboard.writeText(URL);
     copy = "Copied to clipboard";
     //'http://localhost:8000/module/manifest/'+  btoa(JSON.stringify(data)) + '/manifest.json'
